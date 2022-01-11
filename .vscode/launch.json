@@ -4,6 +4,7 @@
     // 자세한 내용을 보려면 https://go.microsoft.com/fwlink/?linkid=830387을(를) 방문하세요.
     "version": "0.2.0",
     "configurations": [
+
         {
             "type": "pwa-chrome",
             "request": "launch",
@@ -17,15 +18,15 @@
             "request": "launch",
             "program": "${file}",
             "cwd": "${fileDirname}",
-            "port": 9000,
+            "port": 9003,
             "runtimeExecutable": "C:\\php7\\php.exe"
         },
         { 
             "name": "debug for PHP", 
             "type": "php", 
             "request": "launch", 
-            "port": 9000,
-            "runtimeExecutable": "C:\\php7\\php.exe"
+            "port": 9003
+            
         }
     ]
 }
