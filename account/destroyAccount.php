@@ -1,6 +1,6 @@
 <?php
 
-    require_once 'connect.php';
+require_once '../connect.php';
 
     $user_id = $_POST['user_id'];
 

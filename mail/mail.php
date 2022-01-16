@@ -8,7 +8,7 @@
  */
 $user_mail = $_GET['email'];
 
-require_once 'connect.php';
+require_once '../connect.php';
 
 $sql = "SELECT user_id FROM user_table WHERE user_email = '$user_mail'";
 $result = mysqli_query($conn, $sql);
@@ -75,7 +75,7 @@ if ($data_num == 1){ //중복된 데이터가 있을 경우
     $mail->addReplyTo('sjh_0832@naver.com', '어디든짐');
 
     //Set who the message is to be sent to 받을사람
-    $mail->addAddress($user_mail, '이건뭐임');
+    $mail->addAddress($user_mail, '회원');
 
     //Set the subject line
     $mail->Subject = '어디든짐(GYM) 인증 메세지입니다';

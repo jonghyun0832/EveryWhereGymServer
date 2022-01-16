@@ -3,7 +3,7 @@
     $user_mail = $_POST['email'];
     $reset_password = $_POST['password'];
 
-    require_once 'connect.php';
+    require_once '../connect.php';
 
     $sql = "UPDATE user_table SET user_password = '$reset_password' WHERE user_email = '$user_mail'";
 

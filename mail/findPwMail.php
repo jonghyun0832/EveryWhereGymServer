@@ -2,7 +2,7 @@
 
 $user_mail = $_GET['email'];
 
-require_once 'connect.php';
+require_once '../connect.php';
 
 $sql = "SELECT user_id FROM user_table WHERE user_email = '$user_mail'";
 $result = mysqli_query($conn, $sql);
