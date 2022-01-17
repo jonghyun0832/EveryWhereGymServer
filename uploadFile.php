@@ -4,11 +4,13 @@ require_once 'connect.php';
 
 $source = $_FILES['upload']['tmp_name']; 
 
-$file_name = $_FILES['upload']['name'];
-$file_path = $file_name.".jpeg";
-
 $prev_url = $_GET['prev_url'];
 $user_id = $_GET['user_id'];
+
+$timestamp = time();
+
+$file_name = $_FILES['upload']['name'];
+$file_path = $user_id."_".$file_name."_".$timestamp.".jpeg";
 
 $sql = "UPDATE user_table SET user_img = '$file_path' WHERE user_id = '$user_id'";
 
