@@ -16,7 +16,7 @@ $file_name = $_FILES['img_upload']['name'];
 $file_path = $user_id."_".$file_name."_".$timestamp.".jpeg";
 
 $file_name_back = $_FILES['img_upload2']['name'];
-$file_path_back = $user_id."_".$file_name_back."_BACK_".$timestamp.".jpeg";
+$file_path_back = $user_id."_".$file_name_back."_".$timestamp.".jpeg";
 
 $prev_path = "./image/".$prev_url;
 $prev_back_path = "./image/".$prev_back_url;
