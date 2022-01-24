@@ -21,7 +21,9 @@
                 'vod_title'=>$row['vod_title'],
                 'vod_uploader_name'=>$row['user_name'],
                 'vod_path'=>$row['vod_path'],
-                'vod_uploader_id'=>$row['user_id']
+                'vod_uploader_id'=>$row['user_id'],
+                'vod_id'=>$row['vod_id'],
+                'vod_categoty'=>$row['vod_category']
             ));
             //array_push($result_array,$tmp_array);
         }
