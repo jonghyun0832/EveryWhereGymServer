@@ -23,7 +23,7 @@
                 'vod_path'=>$row['vod_path'],
                 'vod_uploader_id'=>$row['user_id'],
                 'vod_id'=>$row['vod_id'],
-                'vod_categoty'=>$row['vod_category']
+                'vod_category'=>$row['vod_category']
             ));
             //array_push($result_array,$tmp_array);
         }
