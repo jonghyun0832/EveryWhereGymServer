@@ -23,11 +23,14 @@
                 'vod_path'=>$row['vod_path'],
                 'vod_uploader_id'=>$row['user_id'],
                 'vod_id'=>$row['vod_id'],
-                'vod_category'=>$row['vod_category']
+                'vod_category'=>$row['vod_category'],
+                'vod_explain'=>$row['vod_explain'],
+                'vod_material'=>$row['vod_material']
             ));
             //array_push($result_array,$tmp_array);
         }
     }
+
 
     echo json_encode(array("resultArray"=>$tmp_array),JSON_UNESCAPED_UNICODE);
 
