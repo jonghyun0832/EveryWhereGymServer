@@ -25,13 +25,15 @@
                 'vod_id'=>$row['vod_id'],
                 'vod_category'=>$row['vod_category'],
                 'vod_explain'=>$row['vod_explain'],
-                'vod_material'=>$row['vod_material']
+                'vod_material'=>$row['vod_material'],
+                'vod_view'=>$row['vod_view'],
+                'vod_calorie'=>$row['vod_calorie']
             ));
             //array_push($result_array,$tmp_array);
         }
     }
 
-
+//
     echo json_encode(array("resultArray"=>$tmp_array),JSON_UNESCAPED_UNICODE);
 
     mysqli_close($conn);

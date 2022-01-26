@@ -14,6 +14,7 @@ $file_vod_id = $_POST['vod_id'];
 $file_previous_thumbnail = $_POST['previous'];
 $file_vod_explain = $_POST['explain'];
 $file_vod_material = $_POST['material'];
+$file_vod_calorie = $_POST['calorie'];
 
 $prev_path = "./image/".$file_previous_thumbnail;
 
@@ -28,7 +29,8 @@ if($img_name != "EMPTY_IMAGE"){
     $sql = "UPDATE vod_table
     SET vod_title = '$file_title', vod_category = '$file_category',
     vod_difficulty = '$file_difficulty',vod_img_path = '$img_file_path',
-    vod_explain = '$file_vod_explain', vod_material = '$file_vod_material'
+    vod_explain = '$file_vod_explain', vod_material = '$file_vod_material',
+    vod_calorie = '$file_vod_calorie'
     WHERE vod_id = '$file_vod_id'";
 
     if(move_uploaded_file($img_source,$img_dest)){
@@ -42,12 +44,13 @@ if($img_name != "EMPTY_IMAGE"){
         $response['success'] = false; //프로필 변경사항 저장 완료
     }
 
-//
+
 } else {
     //이미지가 없는경우
     $sql = "UPDATE vod_table
     SET vod_title = '$file_title', vod_category = '$file_category',
-    vod_difficulty = '$file_difficulty'
+    vod_difficulty = '$file_difficulty',vod_explain = '$file_vod_explain',
+    vod_material = '$file_vod_material',vod_calorie = '$file_vod_calorie'
     WHERE vod_id = '$file_vod_id'";
 
     if(mysqli_query($conn, $sql)){

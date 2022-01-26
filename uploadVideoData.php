@@ -16,6 +16,7 @@ $file_category = $_POST['category'];
 $file_difficulty = $_POST['difficulty'];
 $file_explain = $_POST['explain'];
 $file_material = $_POST['material'];
+$file_calorie = $_POST['calorie'];
 
 $timestamp = time();
 
@@ -32,8 +33,8 @@ if($img_name != ""){
     $img_dest = "./image/".$img_file_path;
 }
 
-$sql = "INSERT INTO vod_table(user_id,vod_title,vod_category,vod_difficulty,vod_length,vod_path,vod_img_path,vod_explain,vod_material)
-VALUES('$file_user','$file_title','$file_category','$file_difficulty','$file_length','$file_name','$img_file_path','$file_explain','$file_material')";
+$sql = "INSERT INTO vod_table(user_id,vod_title,vod_category,vod_difficulty,vod_length,vod_path,vod_img_path,vod_explain,vod_material,vod_calorie)
+VALUES('$file_user','$file_title','$file_category','$file_difficulty','$file_length','$file_name','$img_file_path','$file_explain','$file_material','$file_calorie')";
 
 
 if(move_uploaded_file($source,$dest) && move_uploaded_file($img_source,$img_dest)){
@@ -45,7 +46,6 @@ if(move_uploaded_file($source,$dest) && move_uploaded_file($img_source,$img_dest
 } else { //파일 저장 경로 오류
     $response['success'] = false; //프로필 변경사항 저장 완료
 }
-
 echo json_encode($response);
 
 ?>
