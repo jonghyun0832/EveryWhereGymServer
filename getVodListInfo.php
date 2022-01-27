@@ -33,7 +33,7 @@
         }
     }
 
-//
+
     echo json_encode(array("resultArray"=>$tmp_array),JSON_UNESCAPED_UNICODE);
 
     mysqli_close($conn);
