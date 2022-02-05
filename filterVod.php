@@ -16,9 +16,13 @@ $diff_filter1 = "입문";
 $diff_filter2 = "초급";
 $diff_filter3 = "중급";
 
+$time_filter1 = 0;
+$time_filter2 = 100;
+
 
 $category_array = explode(', ',$filter_category);
 $difficulty_array = explode(', ',$filter_difficulty);
+$time_array = explode(' ~ ',$filter_time);
 
 if (count($category_array) == 1){
     $filter1 = $category_array[0];
@@ -56,6 +60,11 @@ if (count($difficulty_array) == 1){
     $diff_filter3 = $difficulty_array[2];
 }
 
+if (count($time_array)==2){
+    $time_filter1 = (int)$time_array[0];
+    $time_filter2 = (int)$time_array[1];
+}
+
 //일단은 카테고리 필터만 ㄱㄱ 
 //sql 문 만들어야함
 
@@ -64,11 +73,8 @@ $tmp_array = array();
 
 $sql2 = "SELECT * FROM vod_table V
 INNER JOIN user_table U ON V.user_id = U.user_id
-WHERE V.vod_category REGEXP ('$filter1|$filter2|$filter3|$filter4|$filter5') AND V.vod_difficulty REGEXP ('$diff_filter1|$diff_filter2|$diff_filter3')
+WHERE V.vod_category REGEXP ('$filter1|$filter2|$filter3|$filter4|$filter5') AND V.vod_difficulty REGEXP ('$diff_filter1|$diff_filter2|$diff_filter3') AND V.vod_time >= $time_filter1 AND V.vod_time <= $time_filter2
 ORDER BY vod_id DESC";
-
-
-
 
 // $sql2 = "SELECT * FROM vod_table V
 // INNER JOIN user_table U ON V.user_id = U.user_id

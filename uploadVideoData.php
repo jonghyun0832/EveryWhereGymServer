@@ -10,6 +10,7 @@ $img_name = $_FILES['thumbnail']['name'];
 
 $file_name = $_POST['name'];
 $file_length = $_POST['length'];
+$file_time = $_POST['time'];
 $file_user = $_POST['userId'];
 $file_title = $_POST['title'];
 $file_category = $_POST['category'];
@@ -33,8 +34,8 @@ if($img_name != ""){
     $img_dest = "./image/".$img_file_path;
 }
 
-$sql = "INSERT INTO vod_table(user_id,vod_title,vod_category,vod_difficulty,vod_length,vod_path,vod_img_path,vod_explain,vod_material,vod_calorie)
-VALUES('$file_user','$file_title','$file_category','$file_difficulty','$file_length','$file_name','$img_file_path','$file_explain','$file_material','$file_calorie')";
+$sql = "INSERT INTO vod_table(user_id,vod_title,vod_category,vod_difficulty,vod_length,vod_path,vod_img_path,vod_explain,vod_material,vod_calorie,vod_time)
+VALUES('$file_user','$file_title','$file_category','$file_difficulty','$file_length','$file_name','$img_file_path','$file_explain','$file_material','$file_calorie','$file_time')";
 
 
 if(move_uploaded_file($source,$dest) && move_uploaded_file($img_source,$img_dest)){
