@@ -65,11 +65,8 @@ if (count($time_array)==2){
     $time_filter2 = (int)$time_array[1];
 }
 
-//일단은 카테고리 필터만 ㄱㄱ 
-//sql 문 만들어야함
 
 $tmp_array = array();
-//if ($filter_difficulty == null || $filter_time == null){
 
 $sql2 = "SELECT * FROM vod_table V
 INNER JOIN user_table U ON V.user_id = U.user_id
