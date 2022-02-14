@@ -5,30 +5,17 @@ require_once 'connect.php';
 $tmp_array = array();
 
 $getted_date = $_POST['select_date'];
+$user_id = $_POST['user_id'];
 
-date_default_timezone_set('Asia/Seoul');
-$timestamp_now = strtotime("Now");
-//$timestamp_able = strtotime("-2 minutes");
-$today = date("H:i",$timestamp);
-$today2 = date("H:i",$timestamp2);
-
-
-$sql = "SELECT *,date_format(li_date, '%Y.%c.%d') as todaydate, date_format(li_date, '%Y-%c-%d') as stamp FROM live_table L
+$sql = "SELECT *,date_format(li_date, '%Y.%c.%d') as todaydate FROM live_table L
 INNER JOIN user_table U ON L.user_id = U.user_id
-HAVING todaydate = '$getted_date'
+HAVING todaydate = '$getted_date' AND U.user_id = '$user_id'
 ORDER BY li_id DESC";
 
 $result = mysqli_query($conn, $sql);
 
 if(mysqli_num_rows($result) > 0){
     while($row = mysqli_fetch_assoc($result)){
-        $enable = "0";
-        $strtime = $row['stamp']." ".$row['li_start_hour'].":".$row['li_start_minute'].":00";
-        //$timestamp_start_time = strtotime($strtime);
-        $timestamp_start = strtotime($strtime." -2 minutes");
-        if($timestamp_now >= $timestamp_start){
-            $enable = "1";
-        }
         array_push($tmp_array, array(
             'live_id'=>$row['li_id'],
             'live_date'=>$row['li_date'],
@@ -43,8 +30,7 @@ if(mysqli_num_rows($result) > 0){
             'uploader_id'=>$row['user_id'],
             'uploader_name'=>$row['user_name'],
             'uploader_img'=>$row['user_img'],
-            'open'=>$row['li_open'],
-            'enable'=>$enable
+            'open'=>$row['li_open']
         ));
     }
 }
