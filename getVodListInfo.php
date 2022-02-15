@@ -19,7 +19,7 @@
     INNER JOIN user_table U ON V.user_id = U.user_id
     ORDER BY vod_id DESC";
 
-    //$result_array = array();
+    
     $tmp_array = array();
 
     // $sql = "SELECT * FROM vod_table V

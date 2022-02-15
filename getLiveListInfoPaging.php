@@ -48,10 +48,11 @@ $today2 = date("H:i",$timestamp2);
 // INNER JOIN user_table U ON L.user_id = U.user_id
 // HAVING todaydate = '$getted_date'
 // ORDER BY li_id DESC";
+//
 
 $sql = "SELECT *,date_format(li_date, '%Y.%c.%d') as todaydate, date_format(li_date, '%Y-%c-%d') as stamp FROM live_table L
 INNER JOIN user_table U ON L.user_id = U.user_id
-HAVING todaydate = '$getted_date'
+HAVING todaydate = '$getted_date' AND li_id < $cursor
 ORDER BY li_id DESC
 LIMIT $limit";
 
@@ -86,7 +87,11 @@ if(mysqli_num_rows($result) > 0){
     }
 }
 
-echo json_encode(array("resultArray"=>$tmp_array),JSON_UNESCAPED_UNICODE);
+//echo json_encode(array("resultArray"=>$tmp_array),JSON_UNESCAPED_UNICODE);
+
+$response = array("resultArray"=>$tmp_array,"cursor" => $tmp_array[$limit-1]['live_id'],"end"=>$end);
+
+echo json_encode($response);
 
 mysqli_close($conn);
 
