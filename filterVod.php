@@ -2,6 +2,20 @@
 
 require_once 'connect.php';
 
+$page = $_POST['page'];
+$limit = $_POST['limit'];
+$cursor = $_POST['cursor'];
+
+$end = false;
+
+$last_num = $page * $limit;
+$prev_step = ($page-1) * $limit;
+
+if($cursor == 0){
+    $cursor = 99999;
+}
+
+
 $filter_category = $_POST['filter_category'];
 $filter_difficulty = $_POST['filter_difficulty'];
 $filter_time = $_POST['filter_time'];
@@ -65,13 +79,35 @@ if (count($time_array)==2){
     $time_filter2 = (int)$time_array[1];
 }
 
-
-$tmp_array = array();
-
-$sql2 = "SELECT * FROM vod_table V
+$sql_select = "SELECT * FROM vod_table V
 INNER JOIN user_table U ON V.user_id = U.user_id
 WHERE V.vod_category REGEXP ('$filter1|$filter2|$filter3|$filter4|$filter5') AND V.vod_difficulty REGEXP ('$diff_filter1|$diff_filter2|$diff_filter3') AND V.vod_time >= $time_filter1 AND V.vod_time <= $time_filter2
 ORDER BY vod_id DESC";
+
+$result_select = mysqli_query($conn, $sql_select);
+
+if (mysqli_num_rows($result_select) <= $last_num){
+    $end = true;
+    if(mysqli_num_rows($result_select) - $prev_step > 0){
+        $limit = mysqli_num_rows($result_select) - $prev_step;
+    } else {
+        $limit = 0;
+    }
+}
+
+
+$tmp_array = array();
+
+// $sql2 = "SELECT * FROM vod_table V
+// INNER JOIN user_table U ON V.user_id = U.user_id
+// WHERE V.vod_category REGEXP ('$filter1|$filter2|$filter3|$filter4|$filter5') AND V.vod_difficulty REGEXP ('$diff_filter1|$diff_filter2|$diff_filter3') AND V.vod_time >= $time_filter1 AND V.vod_time <= $time_filter2
+// ORDER BY vod_id DESC";
+
+$sql2 = "SELECT * FROM vod_table V
+INNER JOIN user_table U ON V.user_id = U.user_id
+WHERE V.vod_category REGEXP ('$filter1|$filter2|$filter3|$filter4|$filter5') AND V.vod_difficulty REGEXP ('$diff_filter1|$diff_filter2|$diff_filter3') AND V.vod_time >= $time_filter1 AND V.vod_time <= $time_filter2 AND V.vod_id < $cursor
+ORDER BY vod_id DESC
+LIMIT $limit";
 
 // $sql2 = "SELECT * FROM vod_table V
 // INNER JOIN user_table U ON V.user_id = U.user_id
@@ -107,8 +143,11 @@ if(mysqli_num_rows($result2) > 0){
     }
 }
 
+$response = array("resultArray"=>$tmp_array,"cursor" => $tmp_array[$limit-1]['vod_id'],"end"=>$end);
 
-echo json_encode(array("resultArray"=>$tmp_array),JSON_UNESCAPED_UNICODE);
+echo json_encode($response);
+
+// echo json_encode(array("resultArray"=>$tmp_array),JSON_UNESCAPED_UNICODE);
 
 mysqli_close($conn);
 

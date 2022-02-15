@@ -2,12 +2,46 @@
 
     require_once 'connect.php';
 
+    $page = $_POST['page'];
+    $limit = $_POST['limit'];
+    $cursor = $_POST['cursor'];
+
+    $end = false;
+
+    $last_num = $page * $limit;
+    $prev_step = ($page-1) * $limit;
+
+    if($cursor == 0){
+        $cursor = 99999;
+    }
+
+    $sql_select = "SELECT * FROM vod_table V
+    INNER JOIN user_table U ON V.user_id = U.user_id
+    ORDER BY vod_id DESC";
+
     //$result_array = array();
     $tmp_array = array();
 
+    // $sql = "SELECT * FROM vod_table V
+    // INNER JOIN user_table U ON V.user_id = U.user_id
+    // ORDER BY vod_id DESC";
+    $result_select = mysqli_query($conn, $sql_select);
+
+    if (mysqli_num_rows($result_select) <= $last_num){
+        $end = true;
+        if(mysqli_num_rows($result_select) - $prev_step > 0){
+            $limit = mysqli_num_rows($result_select) - $prev_step;
+        } else {
+            $limit = 0;
+        }
+    }
+
     $sql = "SELECT * FROM vod_table V
     INNER JOIN user_table U ON V.user_id = U.user_id
-    ORDER BY vod_id DESC";
+    WHERE vod_id < $cursor
+    ORDER BY vod_id DESC
+    LIMIT $limit";
+
     $result = mysqli_query($conn, $sql);
 
     if(mysqli_num_rows($result) > 0){
@@ -34,7 +68,13 @@
     }
 
 
-    echo json_encode(array("resultArray"=>$tmp_array),JSON_UNESCAPED_UNICODE);
+    //echo json_encode(array("resultArray"=>$tmp_array),JSON_UNESCAPED_UNICODE);
+
+    //$response['cursor'] = $tmp_array[3]['vod_id'];
+
+    $response = array("resultArray"=>$tmp_array,"cursor" => $tmp_array[$limit-1]['vod_id'],"end"=>$end);
+
+    echo json_encode($response);
 
     mysqli_close($conn);
 
