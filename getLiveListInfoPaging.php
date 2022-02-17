@@ -14,9 +14,9 @@ $end = false;
 $last_num = $page * $limit;
 $prev_step = ($page-1) * $limit;
 
-if($cursor == 0){
-    $cursor = 99999;
-}
+// if($cursor == 0){
+//     $cursor = 99999;
+// }
 
 $sql_select = "SELECT *,date_format(li_date, '%Y.%c.%d') as todaydate, date_format(li_date, '%Y-%c-%d') as stamp FROM live_table L
 INNER JOIN user_table U ON L.user_id = U.user_id
@@ -50,13 +50,14 @@ $today2 = date("H:i",$timestamp2);
 // ORDER BY li_id DESC";
 //
 
-$sql = "SELECT *,date_format(li_date, '%Y.%c.%d') as todaydate, date_format(li_date, '%Y-%c-%d') as stamp FROM live_table L
+$sql = "SELECT *,date_format(li_date, '%Y.%c.%d') as todaydate, (li_start_hour*6000 + li_start_minute*100 - li_id) as cnt, date_format(li_date, '%Y-%c-%d') as stamp FROM live_table L
 INNER JOIN user_table U ON L.user_id = U.user_id
-HAVING todaydate = '$getted_date' AND li_id < $cursor
-ORDER BY li_id DESC
+HAVING todaydate = '$getted_date' AND cnt > $cursor
+ORDER BY cnt
 LIMIT $limit";
 
 $result = mysqli_query($conn, $sql);
+$last_cnt = 0;
 
 if(mysqli_num_rows($result) > 0){
     while($row = mysqli_fetch_assoc($result)){
@@ -84,12 +85,13 @@ if(mysqli_num_rows($result) > 0){
             'open'=>$row['li_open'],
             'enable'=>$enable
         ));
+        $last_cnt = $row['cnt'];
     }
 }
 
 //echo json_encode(array("resultArray"=>$tmp_array),JSON_UNESCAPED_UNICODE);
 
-$response = array("resultArray"=>$tmp_array,"cursor" => $tmp_array[$limit-1]['live_id'],"end"=>$end);
+$response = array("resultArray"=>$tmp_array,"cursor" => $last_cnt,"end"=>$end);
 
 echo json_encode($response);
 
