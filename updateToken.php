@@ -1,0 +1,25 @@
+<?php
+
+require_once 'connect.php';
+
+$user_id = $_POST['user_id'];
+$token = $_POST['token'];
+
+$sql = "UPDATE user_table SET user_token = '$token' WHERE user_id = '$user_id'";
+
+$result = mysqli_query($conn, $sql);
+
+if ($result)
+{
+    $response['success'] = true;
+}
+else
+{
+    $response['success'] = false;
+}
+echo json_encode($response);
+
+mysqli_close($conn);
+
+
+?>
