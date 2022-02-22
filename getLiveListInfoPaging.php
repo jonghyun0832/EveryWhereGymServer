@@ -52,6 +52,7 @@ $today2 = date("H:i",$timestamp2);
 
 $sql = "SELECT *,date_format(li_date, '%Y.%c.%d') as todaydate, (li_start_hour*6000 + li_start_minute*100 - li_id) as cnt, date_format(li_date, '%Y-%c-%d') as stamp FROM live_table L
 INNER JOIN user_table U ON L.user_id = U.user_id
+INNER JOIN trainer_table T ON L.user_id = T.user_id
 HAVING todaydate = '$getted_date' AND cnt > $cursor
 ORDER BY cnt
 LIMIT $limit";
@@ -70,7 +71,7 @@ if(mysqli_num_rows($result) > 0){
         }
         array_push($tmp_array, array(
             'live_id'=>$row['li_id'],
-            'live_date'=>$row['li_date'],
+            'live_date'=>$row['todaydate'],
             'live_title'=>$row['li_title'],
             'live_start_hour'=>$row['li_start_hour'],
             'live_start_minute'=>$row['li_start_minute'],
@@ -82,6 +83,7 @@ if(mysqli_num_rows($result) > 0){
             'uploader_id'=>$row['user_id'],
             'uploader_name'=>$row['user_name'],
             'uploader_img'=>$row['user_img'],
+            'trainer_score'=>$row['tr_score'],
             'open'=>$row['li_open'],
             'enable'=>$enable
         ));

@@ -19,5 +19,5 @@
     mysqli_close($conn);
 
 
-    //
+    //이거안씀 통합됬음 sendDeleteAlarm에
 ?>
