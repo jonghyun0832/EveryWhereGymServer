@@ -45,12 +45,10 @@ $result_update = mysqli_query($conn, $sql_update);
 if ($result_update)
 {
     $response['success'] = true;
-    $response['message'] = "추가 완료";
 }
 else
 {
     $response['success'] = false;
-    $response['message'] = "추가 실패";
 }
 
 
