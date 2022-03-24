@@ -11,6 +11,9 @@ $row = mysqli_fetch_array($result_select);
 
 $live_join = $row['li_join'];
 $new_live_join = $live_join - 1;
+if($new_live_join < 0){
+    $new_live_join = 0;
+}
 
 $sql = "UPDATE live_table SET li_join = '$new_live_join' WHERE li_id = '$live_id'";
 

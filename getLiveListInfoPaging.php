@@ -53,7 +53,7 @@ $today2 = date("H:i",$timestamp2);
 $sql = "SELECT *,date_format(li_date, '%Y.%c.%d') as todaydate, (li_start_hour*6000 + li_start_minute*100 - li_id) as cnt, date_format(li_date, '%Y-%c-%d') as stamp FROM live_table L
 INNER JOIN user_table U ON L.user_id = U.user_id
 INNER JOIN trainer_table T ON L.user_id = T.user_id
-HAVING todaydate = '$getted_date' AND cnt > $cursor
+HAVING todaydate = '$getted_date' AND cnt > $cursor AND li_done = '0'
 ORDER BY cnt
 LIMIT $limit";
 

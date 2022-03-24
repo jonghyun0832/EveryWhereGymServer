@@ -20,20 +20,10 @@ while($row = mysqli_fetch_assoc($result)){
 }
 
 
-//필요한거 : 알림 신청한 사람들의 토큰값을 모두 가져와야함
-
-//토근 가져온거 array에 넣어서 만들기
-// $to_array = array(
-//     //핸드폰 유저?
-//     "cFniDUD1Rx6kbl3EtLeEie:APA91bF7SVw7EymXy6sciaiMQttpc2Nb8N7MeKoYAo1GiHBsj5KLSyRrOExqAYqATr8uSlMHwZ16KJdVEVJ8zziJu76hH8AChOWe8LPkIhX2ysJi9WjmCXnl3l5fXrFuXv_eYScg4TS_",
-//     //avd 트레이너?
-//     "c6kJWsz4RJiwP-ggm8HteA:APA91bEuLRtZW8XFjeZEj3pI81QfE67_QeWzgLQFABkJPv1XTRiHbuZBo6vEe5j-mDQiwvkZVUa2VtI2jahRmBLozNOrAumyKO_RBTEnCkj6RMJ8EBGj_8YU4xScgP-N2G_bnAqkJ-kY"
-// );
 
 $header = array("Content-Type:application/json", "Authorization:key=AAAAk2XjGqM:APA91bFcCD0e8kPYdL8NKw7U55gsNNMeg1aG05wO8lFpNySHxB_ateXQ_LoYITRnv5qfr7XTQO9fVpvnJHLUVFxu6FD7hyB9JO5KJOmmDPq98zhnJVNyLxbAdLPg-e4wJyrBKEr-XV81");
 $data = json_encode(array(
     "registration_ids"=>$to_array,
-    //"to" => "알림 신청한 회원들의 토큰 ㄱㄱ",
     "priority" => "high",
     "notification" => array(
         "title"   => "라이브 삭제 알림",
