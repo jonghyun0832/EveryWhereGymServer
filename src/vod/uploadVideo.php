@@ -10,7 +10,7 @@ $file_name = $_FILES['video_file']['name'];
 $get_file_name = $_REQUEST['filename'];
 
 if($file_name != ""){
-    $dest = "./video/".$file_name;
+    $dest = "../video/".$file_name;
 }
 
 $response['success'] = true;

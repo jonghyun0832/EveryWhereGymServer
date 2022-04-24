@@ -15,11 +15,11 @@ $file_path = $user_id."_".$file_name."_".$timestamp.".jpeg";
 $sql = "UPDATE user_table SET user_img = '$file_path' WHERE user_id = '$user_id'";
 
 
-$prev_path = "./image/".$prev_url;
+$prev_path = "../image/".$prev_url;
 
 
 if($file_name != ""){
-    $dest = "./image/".$file_path;
+    $dest = "../image/".$file_path;
     move_uploaded_file($source,$dest);
     unlink($prev_path);
 }

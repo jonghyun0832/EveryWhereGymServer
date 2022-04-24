@@ -18,8 +18,8 @@ $file_path = $user_id."_".$file_name."_".$timestamp.".jpeg";
 $file_name_back = $_FILES['img_upload2']['name'];
 $file_path_back = $user_id."_".$file_name_back."_".$timestamp.".jpeg";
 
-$prev_path = "./image/".$prev_url;
-$prev_back_path = "./image/".$prev_back_url;
+$prev_path = "../image/".$prev_url;
+$prev_back_path = "../image/".$prev_back_url;
 
 
 if ($file_name != "" && $file_name_back != ""){
@@ -45,13 +45,13 @@ if ($file_name != "" && $file_name_back != ""){
 
 
 if($file_name != ""){
-    $dest = "./image/".$file_path;
+    $dest = "../image/".$file_path;
     move_uploaded_file($source,$dest);
     unlink($prev_path);
 }
 
 if($file_name_back != ""){
-    $dest_back = "./image/".$file_path_back;
+    $dest_back = "../image/".$file_path_back;
     move_uploaded_file($source_back,$dest_back);
     unlink($prev_back_path);
 }

@@ -26,12 +26,12 @@ $img_file_path = $file_user."_".$img_name."_".$timestamp.".jpeg";
 
 
 if($file_origin != ""){
-    $dest = "./video/".$file_name;
+    $dest = "../video/".$file_name;
     //$dest = "./video/".$file_name.".mp4";
 }
 
 if($img_name != ""){
-    $img_dest = "./image/".$img_file_path;
+    $img_dest = "../image/".$img_file_path;
 }
 
 $sql = "INSERT INTO vod_table(user_id,vod_title,vod_category,vod_difficulty,vod_length,vod_path,vod_img_path,vod_explain,vod_material,vod_calorie,vod_time)
