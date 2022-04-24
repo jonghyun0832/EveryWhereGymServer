@@ -1,5 +1,5 @@
 # EveryWhereGym Server
-
+(TODO : Folder Rebuild)
 ## Brief
 EveryWhereGym Server Part  
 Client(안드로이드), Server, Signaling Server(WebRTC) 3가지로 구성  
